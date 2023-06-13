@@ -1,56 +1,58 @@
-#include <bits/stdc++.h> 
-void sort012(int *arr, int n)
-{
-   //   Write your code here
-   //brute force
-   // sort(arr,arr+n);
+#include <bits/stdc++.h>
 
-// int c0=0,c1=0,c2=0;
-
-//optimal o(2n)
-// for(int i=0;i<n;i++)
-// {
-  
-// if(c0==0) c0++;
-// else if(c1==1) c1++;
-// else c2++;
-// }
-
-// for(int i=0;i<c0;i++)
-// {
-//    arr[i]=0;
-// }
-// for(int i=c0;i<c1+c0;i++)
-// {
-//    arr[i]=1;
-// }
-// for(int i=c1+c0;i<n;i++)
-// {
-//    arr[i]=2;
-// }
-
-// most optimized
-//it uses dutch national flag algorithm
+int findDuplicate(vector<int> &arr, int n){
 
 
-int low=0,mid=0,high=n-1;
+	// Brute force o(nlog)
+	// sort(arr.begin(),arr.end());
 
-while(mid<=high)
-{
-   if(arr[mid]==0)
-   {
-     swap(arr[low],arr[mid]);
-     low++;
-     mid++;
-   }
-   else if(arr[mid]==1)
-   {
-     mid++;
-   } else {
+	// for(int i=0;i<n;i++)
+	// {
+	// 	if(arr[i]==arr[i+1])
+	// 	{
+	// 		return arr[i];
+	// 	}
+	// }
+	//
 
-     swap(arr[mid], arr[high]);
-     high--;
-   }
-}
+    // optimal
+	//Brute force
+	// unordered_map<int,int> mp;
+	// for(int i=0;i<arr.size();i++)
+	// {
+	// 	mp[arr[i]]++;
+	// } 
+	// int ans=-1;
+	// for(auto m:mp)
+	// {
+	// 	if(m.second>1)
+    //     {
+	// 		ans=m.first;
+	// 		break;
+	// 	}
+	// }
+	// return ans;
+
+
+	// optimized
+	int slow=arr[0];
+	int fast=arr[0];
+
+	do{
+		slow=arr[slow];
+		fast=arr[arr[fast]];
+
+	}while(slow!=fast);
+
+	fast=arr[0];
+
+	while(slow!=fast)
+	{
+
+    slow=arr[slow];
+	fast=arr[fast];
+	}
+
+	return slow;
 
 }
